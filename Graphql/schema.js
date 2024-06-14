@@ -6,17 +6,22 @@ import { InventoryBrandsResolvers } from "../Controllers/Inventory/brands.contro
 import { InventoryBrandTypeDef } from "./InventorySchemas/BrandsSchema.js";
 import { InventoryWarehouseResolvers } from "../Controllers/Inventory/warehouses.controller.js";
 import { InventoryWarehouseTypeDef } from "./InventorySchemas/WarehousesSchema.js";
+import { makeExecutableSchema } from '@graphql-tools/schema'
+import { AuthGraphqlResolver } from "../Controllers/Auth/AuthGraphql.js";
+import { graphqlAuthTypeDef } from "./GraphQlAuth/graphqlauth.js";
 export const schema = createSchema({
     typeDefs:[
         InventoryProductsTypeDef,
         InventoryBrandTypeDef,
-        InventoryWarehouseTypeDef
+        InventoryWarehouseTypeDef,
+        graphqlAuthTypeDef
     ],
 
     resolvers:_.merge(
         InventoryProductsResolvers,
         InventoryBrandsResolvers,
-        InventoryWarehouseResolvers
+        InventoryWarehouseResolvers,
+        AuthGraphqlResolver
     
     )
 })
