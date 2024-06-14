@@ -30,6 +30,10 @@ export const InventoryBrandsResolvers = {
     },
     Mutation:{
         updateBrand:async(obj,args,context)=>{
+                const getbrand = await BrandsModel.findById(args.id)
+                if(!getbrand){
+                    return graphqlErrorHandler("the brand was not found","internal server error",404)
+                }
             
                 const updatebrand = await BrandsModel.findByIdAndUpdate(args.id,{
                     brand:args.brand,
@@ -54,7 +58,7 @@ export const InventoryBrandsResolvers = {
            
                 const lookforduplicate = await BrandsModel.findOne({brand:args.brand})
                 if(lookforduplicate){
-                    return graphqlErrorHandler('the brand name is a duplicate',"Internal server error",500)
+                    return graphqlErrorHandler('the brand name is a duplicate',"Internal server error",406)
 
                 }
 

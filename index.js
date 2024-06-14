@@ -13,6 +13,12 @@ dotenv.config()
 
 const app = express()
 
+const middleware = (req,res,next)=>{
+  console.log("run middleware")
+  next()
+}
+
+app.use(middleware)
 connectDB()
 
 
@@ -36,7 +42,7 @@ const yoga = createYoga({
   }
 })
 
-app.all('/graphql',yoga)
+app.all('/graphql',middleware,yoga)
 
 app.get('/',(req,res)=>{
   res.type('html');

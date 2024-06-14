@@ -1,6 +1,9 @@
 import mongoose from 'mongoose'
 
-const WarehousesSchema = new mongoose.Schema({
+const WarehouseSchema = new mongoose.Schema({
+    userId:{
+        type:String,
+    },
     warehouse:{
         type:String,
         required:[true,"warehouse is required field"],
@@ -27,7 +30,7 @@ const WarehousesSchema = new mongoose.Schema({
         required:[true,"email is required field"],
         
     },
-    zipcode:{
+    zipCode:{
         type:String,
         required:[true,"zipcode is required field"],
         
@@ -36,4 +39,4 @@ const WarehousesSchema = new mongoose.Schema({
 
 })
 
-export default mongoose.model('Warehouse',WarehousesSchema)
+export default mongoose.model('warehouse',WarehouseSchema)
