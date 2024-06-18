@@ -7,11 +7,10 @@ import {ruruHTML} from 'ruru/server'
 import { createYoga } from "graphql-yoga"
 import { schema } from "./Graphql/schema.js"
 import { applyMiddleware } from 'graphql-middleware'
-import { shield,rule } from 'graphql-shield'
-import jwt from "jsonwebtoken"
-import graphqlauthmodel from "./models/GraphqlAuth/graphqlauthmodel.js"
-
-const port = process.env.PORT || 5000;
+import { shield,and,or } from 'graphql-shield'
+import { isAuthenticatedAdmin } from "./middlewares/authmiddlewares.js"
+import { isAuthenticatedUser } from "./middlewares/authmiddlewares.js"
+const port = process.env.PORT || 5001;
 let errorobj;
 dotenv.config()
 
@@ -32,35 +31,16 @@ const corsOptions = {
 app.use(cors(corsOptions))
 app.use(xss())
 
-const isAuthenticated=rule()(async(parent,args,ctx,info)=>{
-    
-    const authorizationToken = ctx.req.headers.authorization
-    let token
-    if(authorizationToken && authorizationToken.startsWith("bearer")){
-      token = authorizationToken.split(' ')[1]
 
-    }
-    
-    const {userId,Role} = jwt.verify(token,process.env.SECRET_KEY)
-    const getUser = await graphqlauthmodel.findById(userId)
-   
-    return getUser.role === "USER";
-    
-})
 
-// const isAuthenticated=rule()(async(parent,args,ctx,info)=>{
-//       return new Error("you cant do that ")
-// })
-// const isAuthenticated=rule()(async(parent,args,ctx,info)=>{
-//     return ctx.req.headers.userid == "1"
-// })
 
 const permissions = shield({
   Query:{
-  warehouses:isAuthenticated
-  
+  warehouses:or (isAuthenticatedAdmin,isAuthenticatedUser),
+  warehouse:or(isAuthenticatedAdmin,isAuthenticatedUser)
   },
   Mutation:{
+    createWarehouse:or(isAuthenticatedAdmin,isAuthenticatedUser)
     
   }
 })
@@ -75,6 +55,7 @@ const yoga = createYoga({
     return {
       
       hello:errorobj
+
     }
   }
 })

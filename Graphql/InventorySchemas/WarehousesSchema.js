@@ -12,10 +12,10 @@ export const InventoryWarehouseTypeDef = /* GraphQL */ `
 
     type Query {
         warehouse(id:ID!):Warehouse
-        warehouses(userid:ID!):[Warehouse]
+        warehouses(userid:String!):[Warehouse]
     }
     type Mutation{
-        updateWarehouse(id:String!,userid:String!,warehouse:String,phone:String,country:String,city:String,email:String,zipCode:String):Warehouse
+        updateWarehouse(id:String!,userId:String!,warehouse:String,phone:String,country:String,city:String,email:String,zipCode:String):Warehouse
         createWarehouse(userId:String!,warehouse:String!,phone:String!,country:String!,city:String!,email:String!,zipCode:String!):Warehouse
 
     }

@@ -10,14 +10,14 @@ export const AuthGraphqlResolver = {
     Mutation:{
         signup:async(obj,args,context)=>{
             if(args.password !== args.confirmPassword){
-                return Error('passwords do not match')
+                return new Error('passwords do not match')
 
             }
             
              const searchUser = await graphqlauthmodel.findOne({email:args.email})
              console.log(searchUser)
             if(searchUser){
-                return Error('email has already been taken')
+                return new Error('email has already been taken')
             }
 
             const hashedpassword = await bcrypt.hashSync(args.password,10)
@@ -32,7 +32,7 @@ export const AuthGraphqlResolver = {
 
             await SaveUserToDB.save()
 
-            const token = jwt.sign({userId:SaveUserToDB.id,Role:SaveUserToDB},process.env.SECRET_KEY)
+            const token = jwt.sign({userId:SaveUserToDB.id},process.env.SECRET_KEY)
 
             return {
                 token,
@@ -46,13 +46,13 @@ export const AuthGraphqlResolver = {
 
             const getUserFromDB = await graphqlauthmodel.findOne({email:args.email})
             if(!getUserFromDB){
-                return Error("user not found")
+                return new Error("user not found")
             }
 
             const valid = await bcrypt.compareSync(args.password,getUserFromDB.password)
 
             if(!valid){
-                return Error("user password not valid")
+                return new Error("user password not valid")
             }
 
             const token = jwt.sign({userId:getUserFromDB.id,Role:getUserFromDB.role},process.env.SECRET_KEY)

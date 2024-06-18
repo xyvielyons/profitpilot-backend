@@ -13,7 +13,6 @@ const GraphqlAuthModelSchema = new mongoose.Schema({
         
         
     },
-    
     email:{
         type:String,
         required:[true,"email is required field"],
@@ -24,6 +23,11 @@ const GraphqlAuthModelSchema = new mongoose.Schema({
         required:[true,"password is required field"],
         
     },
+    status:{
+        type:String,
+        required:[true,"status is required field"],
+        default:"active"
+    }
 
 })
 

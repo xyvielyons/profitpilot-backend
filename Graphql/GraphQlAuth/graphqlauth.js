@@ -4,6 +4,7 @@ export const graphqlAuthTypeDef = /* GraphQL */ `
         name:String
         role:String
         email:String
+        status:String
         password:String
     }
     type Query {
