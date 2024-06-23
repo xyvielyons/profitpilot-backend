@@ -14,6 +14,7 @@ const BrandSchema = new mongoose.Schema({
     image:{
         type:String,
         required:[true,"Image is required field"],
+        default:"https://img.freepik.com/free-vector/brand-creation-concept-illustration_114360-11328.jpg"
         
     },
     

@@ -12,7 +12,7 @@ export const InventoryBrandTypeDef = /* GraphQL */ `
     }
     type Mutation{
         updateBrand(id:String!,userId:String!,brand:String,image:String,description:String):Brand
-        createBrand(userId:String!,brand:String!,image:String!,description:String!):Brand
+        createBrand(userId:String!,brand:String!,image:String,description:String!):Brand
     }
 
 
