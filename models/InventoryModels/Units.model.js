@@ -1,10 +1,14 @@
 import mongoose from 'mongoose'
 
 const UnitSchema = new mongoose.Schema({
+    userId:{
+        type:String,
+        required:[true,"userId is a required field"]
+    },
     unit:{
         type:String,
         required:[true,"Unit is required field"],
-        unique:true
+       
     },
     shortName:{
         type:String,
@@ -30,4 +34,4 @@ const UnitSchema = new mongoose.Schema({
 
 })
 
-export default mongoose.model('Unit',UnitSchema)
+export default mongoose.model('unit',UnitSchema)

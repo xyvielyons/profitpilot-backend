@@ -11,6 +11,10 @@ import { AuthGraphqlResolver } from "../Controllers/Auth/AuthGraphql.js";
 import { graphqlAuthTypeDef } from "./GraphQlAuth/graphqlauth.js";
 import { InventoryCategoryTypeDef } from "./InventorySchemas/CategorySchema.js";
 import { InventoryCategoryResolvers } from "../Controllers/Inventory/category.controller.js";
+import { InventoryUnitsResolvers } from "../Controllers/Inventory/units.controller.js";
+import { InventoryUnitsTypeDef } from "./InventorySchemas/UnitsSchema.js";
+import { InventoryVariantsResolvers } from "../Controllers/Inventory/variants.controller.js";
+import { InventoryVariantsTypeDef } from "./InventorySchemas/VariantsSchema.js";
 export const schema = createSchema({
     typeDefs:[
         InventoryProductsTypeDef,
@@ -18,6 +22,8 @@ export const schema = createSchema({
         InventoryWarehouseTypeDef,
         graphqlAuthTypeDef,
         InventoryCategoryTypeDef,
+        InventoryUnitsTypeDef,
+        InventoryVariantsTypeDef
     ],
 
     resolvers:_.merge(
@@ -26,6 +32,8 @@ export const schema = createSchema({
         InventoryWarehouseResolvers,
         AuthGraphqlResolver,
         InventoryCategoryResolvers,
+        InventoryUnitsResolvers,
+        InventoryVariantsResolvers
     
     )
 })

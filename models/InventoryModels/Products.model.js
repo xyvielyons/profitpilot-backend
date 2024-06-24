@@ -1,10 +1,15 @@
 import mongoose from 'mongoose'
 
 const ProductSchema = new mongoose.Schema({
+    userId:{
+        type:String,
+        required:[true,"userId is required field"]
+
+    },
     product:{
         type:String,
         required:[true,"Product is required field"],
-        unique:true
+       
     },
     image:{
         type:String,
@@ -38,15 +43,15 @@ const ProductSchema = new mongoose.Schema({
     },
     stockUnit:{
         type:Number,
-        required:[true,"salePrice is required field"],
+        required:[true,"stockunit is required field"],
         
     },
     warehouse:{
         type:String,
-        required:[true,"salePrice is required field"],
+        required:[true,"warehouse is required field"],
         
     },
 
 })
 
-export default mongoose.model('Product',ProductSchema)
+export default mongoose.model('product',ProductSchema)
