@@ -59,11 +59,6 @@ export const InventoryWarehouseResolvers = {
         },
         createWarehouse:async(obj,args,context)=>{
            
-                const lookforduplicate = await WarehousesModel.findOne({warehouse:args.warehouse})
-                if(lookforduplicate){
-                    return new Error('the warehouse name has already been used')
-
-                }
 
                 const createWarehouse = new WarehousesModel({
                     userId:args.userId,

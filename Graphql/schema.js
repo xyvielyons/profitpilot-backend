@@ -9,19 +9,23 @@ import { InventoryWarehouseTypeDef } from "./InventorySchemas/WarehousesSchema.j
 import { makeExecutableSchema } from '@graphql-tools/schema'
 import { AuthGraphqlResolver } from "../Controllers/Auth/AuthGraphql.js";
 import { graphqlAuthTypeDef } from "./GraphQlAuth/graphqlauth.js";
+import { InventoryCategoryTypeDef } from "./InventorySchemas/CategorySchema.js";
+import { InventoryCategoryResolvers } from "../Controllers/Inventory/category.controller.js";
 export const schema = createSchema({
     typeDefs:[
         InventoryProductsTypeDef,
         InventoryBrandTypeDef,
         InventoryWarehouseTypeDef,
-        graphqlAuthTypeDef
+        graphqlAuthTypeDef,
+        InventoryCategoryTypeDef,
     ],
 
     resolvers:_.merge(
         InventoryProductsResolvers,
         InventoryBrandsResolvers,
         InventoryWarehouseResolvers,
-        AuthGraphqlResolver
+        AuthGraphqlResolver,
+        InventoryCategoryResolvers,
     
     )
 })
