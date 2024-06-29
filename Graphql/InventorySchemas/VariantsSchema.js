@@ -5,10 +5,12 @@ export const InventoryVariantsTypeDef = /* GraphQL */`
         name:String!
         values:[String!]
     }
+
     type Query {
         variants(userId:String!):[Variants]
         variant(id:String!):Variants
     }
+    
     type Mutation{
         updateVariant(id:String!,userId:String!,name:String,values:String):Variants
         createVariant(userId:String!,name:String!,values:String!):Variants
