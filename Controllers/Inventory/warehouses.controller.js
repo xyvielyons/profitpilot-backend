@@ -83,6 +83,20 @@ export const InventoryWarehouseResolvers = {
            
             
 
+        },
+        deleteWarehouse:async(obj,args,context)=>{
+            const deleteWarehouse = await WarehousesModel.findByIdAndDelete(args.id)
+            
+            if(deleteWarehouse){
+                return {
+                    status:"Success",
+                    message:"warehouse deleted successfully"
+                }
+            }
+            if(!deleteWarehouse){
+                return new Error("failed to delete warehouse")
+            }
+
         }
 
     }

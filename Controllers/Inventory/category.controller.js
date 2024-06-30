@@ -79,8 +79,7 @@ export const InventoryCategoryResolvers = {
         },
         deleteCategory:async(obj,args,context)=>{
             const deleteCategory = await CategoriesModel.findByIdAndDelete(args.id)
-            console.log(args)
-            console.log(deleteCategory)
+           
             if(deleteCategory){
                 return {
                     status:"Success",
