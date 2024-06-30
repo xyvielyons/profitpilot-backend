@@ -78,6 +78,19 @@ export const InventoryBrandsResolvers = {
     
                 return createBrand
 
+        },
+        deleteBrand:async(obj,args,context)=>{
+            const deleteBrand = await BrandsModel.findByIdAndDelete(args.id)
+            
+            if(deleteBrand){
+                return {
+                    status:"Success",
+                    message:"brand deleted successfully"
+                }
+            }
+            if(!deleteBrand){
+                return new Error("failed to delete brand")
+            }
         }
 
     }
