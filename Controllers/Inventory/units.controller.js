@@ -82,6 +82,19 @@ export const InventoryUnitsResolvers = {
            
             
 
+        },
+        deleteUnit:async(obj,args,context)=>{
+            const deleteUnit = await UnitsModel.findByIdAndDelete(args.id)
+            
+            if(deleteUnit){
+                return {
+                    status:"Success",
+                    message:"unit deleted successfully"
+                }
+            }
+            if(!deleteUnit){
+                return new Error("failed to delete unit")
+            }
         }
 
     }
