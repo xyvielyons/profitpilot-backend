@@ -10,7 +10,8 @@ import { applyMiddleware } from 'graphql-middleware'
 import { shield,and,or } from 'graphql-shield'
 import { isAuthenticatedAdmin } from "./middlewares/authmiddlewares.js"
 import { isAuthenticatedUser } from "./middlewares/authmiddlewares.js"
-const port = process.env.PORT || 5001;
+const port = process.env.PORT || 5002
+;
 let errorobj;
 dotenv.config()
 
@@ -36,11 +37,11 @@ app.use(xss())
 
 const permissions = shield({
   Query:{
-  warehouses:or (isAuthenticatedAdmin,isAuthenticatedUser),
-  warehouse:or(isAuthenticatedAdmin,isAuthenticatedUser)
+  // warehouses:or (isAuthenticatedAdmin,isAuthenticatedUser),
+  // warehouse:or(isAuthenticatedAdmin,isAuthenticatedUser)
   },
   Mutation:{
-    createWarehouse:or(isAuthenticatedAdmin,isAuthenticatedUser)
+    // createWarehouse:or(isAuthenticatedAdmin,isAuthenticatedUser)
     
   }
 })
@@ -48,9 +49,20 @@ const permissions = shield({
 const newSchemaWithMiddleware = applyMiddleware(schema,permissions)
 
 
+// const yoga = createYoga({
+//   maskedErrors:false,
+//   schema:newSchemaWithMiddleware,
+//   context:async()=>{
+//     return {
+      
+//       hello:errorobj
+
+//     }
+//   }
+// })
+
 const yoga = createYoga({
-  maskedErrors:false,
-  schema:newSchemaWithMiddleware,
+  schema,
   context:async()=>{
     return {
       

@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import mongoose, { Schema } from 'mongoose'
 
 const ProductSchema = new mongoose.Schema({
     userId:{
@@ -6,51 +6,84 @@ const ProductSchema = new mongoose.Schema({
         required:[true,"userId is required field"]
 
     },
-    product:{
+    warehouse:{
         type:String,
-        required:[true,"Product is required field"],
-       
+        required:[true,"warehouse is required field"]
+
     },
-    image:{
+    productName:{
         type:String,
-        required:[true,"Image is required field"],
-        
+        required:[true,"productName is required field"]
+
     },
-    type:{
+    productSlug:{
         type:String,
-        required:[true,"type is required field"],
-        enum:['single type','variant type']
+        required:[true,"productSlug is required field"]
+
     },
     category:{
         type:String,
-        required:[true,"Product is required field"],
-        
+        required:[true,"category is required field"]
+
     },
     brand:{
         type:String,
-        required:[true,"Product is required field"],
-        
+        required:[true,"brand is required field"]
+
     },
-    salePrice:{
-        type:Number,
-        required:[true,"salePrice is required field"],
-        
-    },
-    purchasePrice:{
-        type:Number,
-        required:[true,"purchasePrice is required field"],
-        
-    },
-    stockUnit:{
-        type:Number,
-        required:[true,"stockunit is required field"],
-        
-    },
-    warehouse:{
+    quantityAlert:{
         type:String,
-        required:[true,"warehouse is required field"],
-        
+        required:[true,"quantityAlert is required field"]
+
     },
+    unit:{
+        type:String,
+        required:[true,"unit is required field"]
+
+    },
+    description:{
+        type:String,
+        required:[true,"description is required field"]
+
+    },
+    variants:[{
+        type:Schema.Types.ObjectId,
+        ref:"variation"
+
+    }],
+    purchasePrice:{
+        type:String,
+        required:[true,"purchasePrice is required field"]
+
+    },
+    sellingPrice:{
+        type:String,
+        required:[true,"sellingPrice is required field"]
+
+    },
+   
+    openingStock:{
+        type:String,
+        required:[true,"openingStock is required field"]
+
+    },
+    taxMethod:{
+        type:String,
+        required:[true,"taxMethod is required field"]
+
+    },
+    tax:{
+        type:String,
+        required:[true,"tax is required field"]
+
+    },
+   
+    image:{
+        type:String,
+        required:[true,"image is required field"]
+
+    },
+   
 
 })
 

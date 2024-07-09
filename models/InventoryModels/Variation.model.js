@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import mongoose, { Schema } from 'mongoose'
 
 const VariationSchema = new mongoose.Schema({
     userId:{
@@ -6,12 +6,25 @@ const VariationSchema = new mongoose.Schema({
         required:[true,"userId is a required field"]
 
     },
-    name:{
+    variantName:{
         type:String,
-        required:[true,"Product is required field"],
+        required:[true,"VariantName is required field"],
 
     },
-    values:[String],
+    productCost:{
+        type:String,
+        required:[true,"ProductCost is required field"],
+
+    },
+    productPrice:{
+        type:String,
+        required:[true,"ProductPrice is required field"],
+
+    },
+    owner:{
+        type:Schema.Types.ObjectId,
+        ref:"product"
+    }
    
 
 })
